@@ -1,4 +1,4 @@
-package com.luv2code.springboot.cruddemo;
+package com.dragon.springboot.cruddemo;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
