@@ -23,6 +23,11 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
+
+    @GetMapping("/home")
+    public String Home(){
+        return "home";
+    }
     @GetMapping("/deleteEmployee")
     public String DeleteEmployee(@RequestParam("employeeId") int id){
         employeeService.deleteById(id);
