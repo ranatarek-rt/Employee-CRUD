@@ -4,13 +4,9 @@ package com.dragon.springboot.cruddemo.controller;
 import com.dragon.springboot.cruddemo.entity.Employee;
 import com.dragon.springboot.cruddemo.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,16 +23,29 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
-//    @GetMapping
-//    public String Home(){
-//        return "redirect:/list";
-//    }
+    @GetMapping("/deleteEmployee")
+    public String DeleteEmployee(@RequestParam("employeeId") int id){
+        employeeService.deleteById(id);
+        return "redirect:/employees/list";
+    }
+    @PostMapping("/updateEmployee")
+    public String updateEmployee(@ModelAttribute Employee employee){
+        employeeService.save(employee);
+        return "redirect:/employees/list";
+    }
 
-    //this to save the user Data in the data base
+    @GetMapping("/updateForm")
+    public String updateEmployeeForm(Model model,@RequestParam("employeeId") int id){
+        Employee tempEmp = employeeService.findById(id);
+        model.addAttribute("employee",tempEmp);
+        return "updateEmployee";
+    }
+
+    //this to save the user Data in the Database
     @PostMapping("/addNewEmployee")
     public String addEmployee(@ModelAttribute Employee employee){
         employeeService.save(employee);
-        return "addEmployee";
+        return "redirect:/employees/addNewEmployeeForm";
     }
 
     //to display the add new employee form
