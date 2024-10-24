@@ -9,6 +9,12 @@
 <body>
 
 <div class="container mt-5">
+    <form action="#" th:action="@{/logout}" method="post">
+        <div class="d-flex justify-content-start">
+            <button type="submit" class="btn btn-danger">Log Out</button>
+        </div>
+    </form>
+
     <h2 class="text-center mb-4">Employee Details</h2>
     <hr>
     <form th:action="@{addNewEmployeeForm}">
