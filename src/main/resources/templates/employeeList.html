@@ -38,17 +38,19 @@
 
     <h2 class="text-center mb-4">Employee Details</h2>
     <hr>
+    <div sec:authorize="hasAnyRole('MANAGER','ADMIN')">
     <form th:action="@{addNewEmployeeForm}">
 
         <input type="submit"  class="btn btn-primary mb-2" value="Add Employee">
     </form>
+    </div>
     <table class="table table-striped table-bordered">
         <thead class="table-dark">
         <tr>
             <th>First Name</th>
             <th>Last Name</th>
             <th>Email</th>
-            <th>Action</th>
+            <th sec:authorize="hasRole('ADMIN')">Action</th>
         </tr>
         </thead>
         <tbody>
@@ -56,10 +58,14 @@
             <td th:text="${tempEmployee.firstName}"></td>
             <td th:text="${tempEmployee.lastName}"></td>
             <td th:text="${tempEmployee.email}"></td>
-            <td><a th:href="@{updateForm(employeeId=${tempEmployee.id})}"  class="btn btn-primary">Update</a>
-                <a th:href="@{deleteEmployee(employeeId=${tempEmployee.id})}"  class="btn btn-danger"
-                   onclick="if (!(confirm('Are you sure you want to delete this employee'))) return false">Delete</a></td>
+            <td sec:authorize="hasRole('ADMIN')">
+
+                    <a th:href="@{updateForm(employeeId=${tempEmployee.id})}" class="btn btn-primary">Update</a>
+                    <a th:href="@{deleteEmployee(employeeId=${tempEmployee.id})}" class="btn btn-danger"
+                       onclick="if (!(confirm('Are you sure you want to delete this employee?'))) return false">Delete</a>
+            </td>
         </tr>
+
 
         </tbody>
     </table>
