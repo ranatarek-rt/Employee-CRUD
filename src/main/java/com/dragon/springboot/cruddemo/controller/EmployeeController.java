@@ -63,5 +63,9 @@ public class EmployeeController {
 
         return "employeeList";
     }
+    @GetMapping("/accessDenied")
+    public String errorPage(){
+        return "access-denied";
+    }
 
 }
