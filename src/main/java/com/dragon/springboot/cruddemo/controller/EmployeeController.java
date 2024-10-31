@@ -23,6 +23,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
 
+
     @GetMapping("/deleteEmployee")
     public String DeleteEmployee(@RequestParam("employeeId") int id){
         employeeService.deleteById(id);
@@ -61,6 +62,10 @@ public class EmployeeController {
         model.addAttribute("employees",employeeList);
 
         return "employeeList";
+    }
+    @GetMapping("/accessDenied")
+    public String errorPage(){
+        return "access-denied";
     }
 
 }
