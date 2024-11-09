@@ -2,6 +2,7 @@ package com.dragon.springboot.cruddemo.aspect;
 
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -38,5 +39,14 @@ public class LoggingAspect {
         }
 
     }
+
+    @AfterReturning(value = "forAllPackages()",returning = "result")
+    private void afterRetuning(JoinPoint joinPoint,Object result){
+        String method = joinPoint.getSignature().toString();
+        System.out.println("the method name that is called: " + method);
+        System.out.println("the returned value: "+ result);
+
+    }
+
 
 }
